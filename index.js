@@ -1,36 +1,23 @@
 import express from "express";
 import http from "http";
-import { fileURLToPath } from "node:url";
-import { dirname, join } from "node:path";
 import { Server } from "socket.io";
-
-// 2. Instances
 
 const app = express();
 const server = http.createServer(app);
 const io = new Server(server);
 
-// 3. Servering HTML file
-const __dirname = dirname(fileURLToPath(import.meta.url));
-app.get("/", (req, res) => res.sendFile(join(__dirname, "index.html")));
-// 4. Define a connection event handler
+app.use(express.static("public"));
 
-io.on("connection", (client) => {
-  console.log("user connect to (Server) 🟢");
-  //   console.log(socket);
+io.on("connection", (socket) => {
+  console.log("user berhasil terhubung yeyyy )");
 
-  //   Emit a 'message' event to the client
+  socket.on("chat message", (msg) => {
+    io.emit("chat message", msg);
+  });
 
-  //   (mengirim data ke client)
-  client.emit("message", "assalamualaikum kinaa aku dari server");
-  //   (menerima data dari client)
-  client.on("message", (message) => console.log(message));
-
-  client.on("disconnect", () => {
-    console.log("user disconnect from (server) 🔴");
+  socket.on("disconnect", () => {
+    console.log("user berhasil terputuss  yeyyy )");
   });
 });
 
-// 5. start the server
-const PORT = 3000;
-server.listen(PORT, () => console.log(`Server running on port :${PORT}`));
+server.listen(3000, () => console.log("wswswsws 3000"));
