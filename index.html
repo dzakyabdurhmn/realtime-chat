@@ -16,6 +16,14 @@
       socket.on("connect", () => {
         console.log("Connected to (Client) 🟢");
       });
+
+      socket.on("disconnect", () => {
+        console.log("Disconnected to (Client) 🔴");
+      });
+
+      setTimeout(() => {
+        socket.disconnect();
+      }, 45);
     </script>
   </body>
 </html>

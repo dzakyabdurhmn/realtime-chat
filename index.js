@@ -15,9 +15,12 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 app.get("/", (req, res) => res.sendFile(join(__dirname, "index.html")));
 // 4. Define a connection event handler
 
-io.on("connection", (socket) => {
+io.on("connection", (client) => {
   console.log("user connect to (Server) 🟢");
   //   console.log(socket);
+  client.on("disconnect", () => {
+    console.log("user disconnect from (server) 🔴");
+  });
 });
 
 // 5. start the server
