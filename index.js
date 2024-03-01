@@ -18,6 +18,14 @@ app.get("/", (req, res) => res.sendFile(join(__dirname, "index.html")));
 io.on("connection", (client) => {
   console.log("user connect to (Server) 🟢");
   //   console.log(socket);
+
+  //   Emit a 'message' event to the client
+
+  //   (mengirim data ke client)
+  client.emit("message", "assalamualaikum kinaa aku dari server");
+  //   (menerima data dari client)
+  client.on("message", (message) => console.log(message));
+
   client.on("disconnect", () => {
     console.log("user disconnect from (server) 🔴");
   });

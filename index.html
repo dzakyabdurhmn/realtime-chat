@@ -13,17 +13,13 @@
     <script>
       const socket = io();
 
-      socket.on("connect", () => {
-        console.log("Connected to (Client) 🟢");
-      });
+      socket.on("connect", () => console.log("Connected to (Client) 🟢"));
+      // menerima data dari server
+      socket.on("message", (message) => console.log(message));
+      // mengirim data ke client
+      socket.emit("message", "assalamualaikum kinaa aku dari client");
 
-      socket.on("disconnect", () => {
-        console.log("Disconnected to (Client) 🔴");
-      });
-
-      setTimeout(() => {
-        socket.disconnect();
-      }, 45);
+      socket.on("disconnect", () => console.log("Disconnected to (Client) 🔴"));
     </script>
   </body>
 </html>
