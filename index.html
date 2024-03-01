@@ -8,5 +8,14 @@
   </head>
   <body class="text-red-600">
     realtime chat
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+      const socket = io();
+
+      socket.on("connect", () => {
+        console.log("Connected to (Client) 🟢");
+      });
+    </script>
   </body>
 </html>
